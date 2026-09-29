@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BPIAN 26 - Official Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#0A58CA;--primary-light:#EBF3FC;--dark-blue:#041E42;--slate-100:#F8FAFC;--slate-200:#E2E8F0;--slate-500:#64748B;--slate-800:#1E293B;--white:#FFFFFF;--event-red:#DC2626;--whatsapp-green:#25D366;--bkash-pink:#E2136E;--bkash-pink-hover:#C20E5E;--transition-curve:all .8s cubic-bezier(.16,1,.3,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-family:'Plus Jakarta Sans',sans-serif;background:var(--white);color:var(--slate-800)}
+body{overflow-x:hidden;line-height:1.6}
+.container{width:100%;max-width:1320px;margin:0 auto;padding:0 20px}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(30px);transition:var(--transition-curve)}
+.reveal.active{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:var(--transition-curve)}
+.reveal-right{opacity:0;transform:translateX(40px);transition:var(--transition-curve)}
+.reveal-left.active,.reveal-right.active{opacity:1;transform:translateX(0)}
+
+/* NAVBAR */
+header{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,.85);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);border-bottom:1px solid rgba(10,88,202,.06);z-index:1000}
+.navbar{display:flex;justify-content:space-between;align-items:center;height:80px}
+.logo-group{display:flex;align-items:center;gap:10px}
+.logo-group img{height:40px;width:auto;object-fit:contain}
+.brand-name{font-weight:800;font-size:1.2rem;color:var(--dark-blue);letter-spacing:-.5px}
+.brand-name span{color:var(--primary)}
+.nav-links{display:flex;align-items:center;gap:24px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--slate-800);font-weight:600;font-size:.9rem;transition:color .3s ease}
+.nav-links a:hover{color:var(--primary)}
+.btn-nav{background:var(--primary);color:var(--white)!important;padding:10px 20px;border-radius:30px;font-weight:700!important;box-shadow:0 4px 14px rgba(10,88,202,.2);transition:var(--transition-curve)!important}
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;width:100%;background:#fff!important;border-top:1px solid var(--slate-200);box-shadow:0 -4px 25px rgba(0,0,0,.08);z-index:99999!important;padding:8px 0}
+.mobile-nav-container{display:grid;grid-template-columns:repeat(5,1fr);align-items:center;width:100%;padding:0 4px}
+.mobile-nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;color:var(--slate-500);font-size:.65rem;font-weight:600;gap:4px;transition:color .2s ease;text-align:center;width:100%;overflow:hidden}
+.mobile-nav-item svg{width:18px;height:18px;fill:currentColor;flex-shrink:0}
+.mobile-nav-item span{white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:100%;display:block}
+.mobile-nav-item:hover,.mobile-nav-item:active{color:var(--primary)}
+.mobile-nav-item.highlight{color:var(--primary);font-weight:700}
+
+/* HERO */
+.hero{padding:160px 0 100px;background:radial-gradient(circle at 85% 15%,rgba(56,189,248,.12) 0%,transparent 45%),radial-gradient(circle at 15% 85%,rgba(10,88,202,.05) 0%,transparent 50%);text-align:center}
+.hero-crests{display:flex;justify-content:center;align-items:center;gap:16px;margin-bottom:20px}
+.hero-crests img{height:70px;width:auto;filter:drop-shadow(0 6px 12px rgba(4,30,66,.08))}
+.hero h1{font-size:3.5rem;font-weight:800;color:var(--dark-blue);line-height:1.2;letter-spacing:-1px;margin-bottom:20px}
+.hero p{font-size:1.15rem;color:var(--slate-500);max-width:720px;margin:0 auto 30px}
+.hero-action-container{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.hero-event-tag{color:var(--event-red);font-size:.85rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px}
+.hero-event-tag::before{content:'';display:inline-block;width:7px;height:7px;background:var(--event-red);border-radius:50%;animation:pulse-dot 1.8s infinite}
+@keyframes pulse-dot{0%{transform:scale(.95);box-shadow:0 0 0 0 rgba(220,38,38,.6)}70%{transform:scale(1);box-shadow:0 0 0 8px rgba(220,38,38,0)}100%{transform:scale(.95);box-shadow:0 0 0 0 rgba(220,38,38,0)}}
+
+/* SUMMARY */
+.summary-section{position:relative;background:#E2E8F0;padding:120px 0;border-top:1px solid var(--slate-200);border-bottom:1px solid var(--slate-200);overflow:hidden}
+.summary-section::before{content:"";position:absolute;inset:0;background:url('images/Screenshot 2026-09-28 210450.png') center/cover no-repeat;opacity:.18;pointer-events:none;z-index:0}
+.summary-side-badge{position:absolute;left:35px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:25px;z-index:5}
+.straight-vertical-title{display:flex;flex-direction:column;align-items:center;text-transform:uppercase;font-size:2.2rem;font-weight:900;color:var(--dark-blue);line-height:1.1;user-select:none;text-shadow:0 2px 12px rgba(255,255,255,.9)}
+.straight-vertical-title span{display:block}
+.straight-vertical-title .space-divider{height:18px}
+.badge-logo-slot{width:80px;height:80px;display:flex;align-items:center;justify-content:center;transition:transform .3s ease}
+.badge-logo-slot:hover{transform:scale(1.08)}
+.badge-logo-slot img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(0,0,0,.15))}
+.summary-layout{position:relative;z-index:1;display:grid;grid-template-columns:.85fr 1.15fr;gap:50px;align-items:center;padding-left:110px}
+.summary-content{text-align:left;max-width:580px}
+.summary-content h2{font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:700;color:#1E293B;margin-bottom:2px;letter-spacing:-1px}
+.summary-content .subtitle{font-size:1.4rem;color:#475569;margin-bottom:24px;font-weight:400}
+.summary-content p{color:#334155;font-size:.95rem;margin-bottom:16px;line-height:1.7}
+.summary-content p.tagline{font-style:italic;font-weight:600;color:var(--dark-blue);margin-top:20px}
+.right-photo-grid{position:relative;width:100%;min-height:680px;display:flex;align-items:center;justify-content:center}
+.photo-card{position:absolute;background:#CBD5E1;border-radius:16px;border:4px solid var(--white);box-shadow:0 16px 36px rgba(0,0,0,.15);overflow:hidden;display:flex;align-items:center;justify-content:center;transition:all .4s cubic-bezier(.16,1,.3,1)}
+.photo-card:hover{transform:scale(1.08) translateY(-8px) rotate(0deg)!important;z-index:25!important;box-shadow:0 24px 48px rgba(0,0,0,.25)}
+.photo-card img{width:100%;height:100%;object-fit:cover;display:block}
+.card-1{width:68%;height:440px;top:50px;right:0;transform:rotate(2deg);z-index:1}
+.card-3{width:52%;height:180px;top:275px;left:-2%;transform:rotate(-1deg);z-index:3}
+.card-4{width:50%;height:160px;top:-10px;left:24%;transform:rotate(4deg);z-index:4}
+.card-5{width:52%;height:160px;bottom:0;left:6%;transform:rotate(-4deg);z-index:5}
+
+/* EVENTS */
+.section-header{text-align:center;margin-bottom:60px}
+.section-header span{color:var(--primary);font-weight:700;text-transform:uppercase;font-size:.8rem;letter-spacing:2px;display:block;margin-bottom:6px}
+.section-header h2{font-size:2.2rem;color:var(--dark-blue);font-weight:800}
+.event-container{padding:80px 0}
+.event-block{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;margin-bottom:80px}
+.event-block:last-child{margin-bottom:0}
+.event-block.reverse{grid-template-columns:.9fr 1.1fr}
+.event-text-pane h3{font-size:1.7rem;color:var(--dark-blue);margin-bottom:16px;font-weight:800}
+.event-text-pane p{color:var(--slate-500);margin-bottom:16px;font-size:.95rem;line-height:1.7}
+.media-stack{position:relative;display:grid;grid-template-columns:repeat(12,1fr);align-items:center;width:100%}
+.media-frame{background:var(--white);padding:6px;border-radius:12px;box-shadow:0 10px 25px rgba(4,30,66,.06);overflow:hidden}
+.media-frame img{width:100%;height:auto;border-radius:8px;display:block}
+.frame-primary{grid-column:1/span 9;z-index:2}
+.frame-secondary{grid-column:6/-1;margin-top:40px;z-index:3}
+
+/* MILESTONES SECTION */
+.schedule-section{background:var(--primary-light);padding:80px 0}
+.wide-photo{width:75vw;margin:60px 0 60px calc(50% - 37.5vw)}
+.wide-photo .media-frame img{width:100%;height:auto;display:block;background:#CBD5E1;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.wide-photo .media-frame:hover img{transform:scale(1.04)}
+
+.sports-block{margin-top:20px}
+.handball-block,.achv-block{margin-top:60px}
+.sports-header{text-align:center;margin-bottom:24px}
+.sports-header span{color:var(--primary);font-weight:700;text-transform:uppercase;font-size:.8rem;letter-spacing:2px;display:block;margin-bottom:6px}
+.sports-header h3{font-size:1.7rem;color:var(--dark-blue);font-weight:800;margin-bottom:10px}
+.sports-header p{color:var(--slate-500);font-size:.95rem;max-width:560px;margin:0 auto}
+
+.zigzag-grid{display:grid;grid-template-columns:repeat(2,1fr);column-gap:60px;row-gap:10px;max-width:980px;margin:0 auto}
+.zigzag-item:nth-child(odd){grid-column:1}
+.zigzag-item:nth-child(even){grid-column:2;margin-top:100px}
+.zigzag-item .media-frame img{aspect-ratio:4/3;object-fit:cover;background:#CBD5E1;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.zigzag-item .media-frame:hover img{transform:scale(1.06)}
+
+/* BUTTONS + TOGGLE AREAS */
+.athletes-cta{display:flex;justify-content:center;margin-top:30px;padding:0 20px}
+.btn-athletes{display:inline-flex;align-items:center;justify-content:center;gap:14px;width:100%;max-width:560px;padding:24px 32px;background:var(--primary);color:var(--white);border:none;border-radius:14px;font-family:inherit;font-size:1.15rem;font-weight:800;letter-spacing:.3px;cursor:pointer;box-shadow:0 10px 26px rgba(10,88,202,.28);transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
+.btn-athletes:hover{background:var(--dark-blue);transform:translateY(-3px);box-shadow:0 16px 34px rgba(4,30,66,.3)}
+.btn-athletes:focus-visible{outline:3px solid rgba(10,88,202,.4);outline-offset:3px}
+.btn-athletes svg{width:22px;height:22px;fill:currentColor;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.btn-athletes[aria-expanded="true"] svg{transform:rotate(180deg)}
+.athletes-small .btn-athletes{max-width:380px;padding:16px 24px;font-size:1rem;border-radius:12px}
+.handball-showcase,.achv-showcase,.athletes-showcase{display:none;margin-top:30px}
+.handball-showcase.open,.achv-showcase.open,.athletes-showcase.open{display:block}
+
+/* ACADEMIC ACHIEVEMENTS */
+.achv-block{width:100vw;margin-left:calc(50% - 50vw)}
+.achv-block .sports-header,.achv-intro{padding:0 20px}
+.achv-intro{text-align:center;max-width:680px;margin:0 auto 60px;color:var(--slate-500);font-size:.98rem;line-height:1.8}
+.achv-grid{display:grid;grid-template-columns:1fr 1fr;align-items:start;width:100%}
+@media (hover:hover) and (pointer:fine){.achv-grid{padding-right:16px}}
+.achv-item{width:48vw;min-width:0}
+.achv-item:nth-child(1){grid-column:1;justify-self:start}
+.achv-item:nth-child(2){grid-column:2;justify-self:end;margin-top:100px}
+.achv-item .media-frame{width:100%}
+.achv-item .media-frame img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;background:#CBD5E1;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.achv-item .media-frame:hover img{transform:scale(1.06)}
+
+/* ATHLETES */
+.athletes-intro{text-align:center;max-width:620px;margin:60px auto 0;padding:0 20px}
+.athletes-intro span{color:var(--primary);font-weight:700;text-transform:uppercase;font-size:.8rem;letter-spacing:2px;display:block;margin-bottom:6px}
+.athletes-intro h3{font-size:1.7rem;color:var(--dark-blue);font-weight:800;margin-bottom:10px}
+.athletes-intro p{color:var(--slate-500);font-size:.95rem;line-height:1.8}
+.athlete-row{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-bottom:80px}
+.athlete-row:last-child{margin-bottom:0}
+.athlete-row.flip .athlete-photo{order:2}
+.athlete-row.flip .athlete-info{order:1}
+.athlete-photo{background:var(--white);padding:8px;border-radius:16px;box-shadow:0 16px 36px rgba(4,30,66,.12);overflow:hidden}
+.athlete-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;border-radius:10px;background:#CBD5E1;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.athlete-photo:hover img{transform:scale(1.05)}
+.athlete-info .athlete-tag{color:var(--primary);font-weight:700;text-transform:uppercase;font-size:.8rem;letter-spacing:2px;display:block;margin-bottom:8px}
+.athlete-info h3{font-size:2rem;color:var(--dark-blue);font-weight:800;margin-bottom:16px;line-height:1.2}
+.athlete-info p{color:var(--slate-500);font-size:1rem;line-height:1.8;white-space:pre-line}
+
+/* REGISTRATION */
+.signup-section{background:linear-gradient(135deg,var(--dark-blue) 0%,#020D23 100%);color:var(--white);padding:100px 0}
+.signup-split{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.signup-info h2{font-size:2.6rem;font-weight:800;margin-bottom:20px;line-height:1.2}
+.signup-info p{color:rgba(255,255,255,.7);margin-bottom:30px;line-height:1.7;font-size:1.05rem}
+.form-card{background:var(--white);padding:32px;border-radius:16px;color:var(--slate-800);box-shadow:0 20px 40px rgba(0,0,0,.25)}
+.bkash-guide-box{background:#FFF1F6;border:2px dashed var(--bkash-pink);border-radius:12px;padding:16px;margin-bottom:20px}
+.guide-title{display:flex;align-items:center;justify-content:space-between;color:var(--bkash-pink);font-weight:800;font-size:.9rem;margin-bottom:8px}
+.num-display{background:var(--white);padding:8px 12px;border-radius:8px;display:flex;align-items:center;justify-content:space-between;font-weight:800;font-size:1.1rem;color:var(--dark-blue);margin-bottom:8px}
+.copy-btn{background:var(--bkash-pink);color:var(--white);border:none;padding:6px 12px;border-radius:6px;font-size:.75rem;font-weight:700;cursor:pointer;transition:background .2s ease}
+.copy-btn:hover{background:var(--bkash-pink-hover)}
+.steps-list{font-size:.8rem;color:var(--slate-800);padding-left:18px;line-height:1.5}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-weight:700;font-size:.85rem;margin-bottom:6px;color:var(--slate-800)}
+.form-group label span{color:var(--bkash-pink)}
+.form-group input{width:100%;padding:12px 14px;border:2px solid var(--slate-200);border-radius:10px;font-family:inherit;font-size:.95rem;background:var(--white);outline:none;transition:border-color .2s ease}
+.form-group input:focus{border-color:var(--primary)}
+.file-upload-wrapper{position:relative;border:2px dashed var(--slate-200);border-radius:10px;padding:20px;text-align:center;background:var(--slate-100);cursor:pointer;transition:border-color .2s ease,background .2s ease}
+.file-upload-wrapper:hover{border-color:var(--primary);background:var(--primary-light)}
+.file-upload-wrapper input[type="file"]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.file-upload-icon{width:32px;height:32px;fill:var(--primary);margin-bottom:6px}
+.file-upload-text{font-size:.85rem;font-weight:600;color:var(--slate-800)}
+.file-upload-subtext{font-size:.75rem;color:var(--slate-500)}
+.file-preview-container{display:none;margin-top:10px;align-items:center;gap:12px;background:var(--slate-100);padding:10px;border-radius:8px;border:1px solid var(--slate-200)}
+.file-preview-img{width:48px;height:48px;border-radius:6px;object-fit:cover;border:1px solid var(--slate-200)}
+.file-preview-info{flex:1;overflow:hidden}
+.file-preview-name{font-size:.85rem;font-weight:700;color:var(--slate-800);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.remove-file-btn{background:var(--event-red);color:var(--white);border:none;padding:4px 8px;border-radius:4px;font-size:.75rem;cursor:pointer;font-weight:600}
+.btn-submit{width:100%;background:var(--whatsapp-green);color:var(--white);border:none;padding:14px;border-radius:10px;font-weight:800;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .3s ease,transform .2s ease;box-shadow:0 4px 14px rgba(37,211,102,.3);margin-top:10px}
+.btn-submit:hover{background:#1eb956;transform:translateY(-2px)}
+.response-alert{margin-top:15px;padding:10px;border-radius:8px;display:none;text-align:center;font-size:.85rem;font-weight:600}
+.response-alert.success{background:#d1e7dd;color:#0f5132;border:1px solid #badbcc}
+.response-alert.error{background:#f8d7da;color:#842029;border:1px solid #f5c2c7}
+
+/* FOOTER */
+footer{background:var(--slate-100);border-top:1px solid var(--slate-200);padding:50px 0 20px}
+.footer-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;margin-bottom:30px}
+.footer-brand h4,.footer-connect h4{color:var(--dark-blue);margin-bottom:12px;font-weight:700}
+.footer-brand p{color:var(--slate-500);font-size:.9rem}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links li a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--slate-800);font-size:.9rem;font-weight:600}
+.footer-links svg{width:16px;height:16px;fill:var(--primary)}
+.footer-bottom{border-top:1px solid var(--slate-200);padding-top:20px;text-align:center;font-size:.85rem;color:var(--slate-500)}
+
+/* RESPONSIVE */
+@media (max-width:1200px){
+.summary-side-badge{display:none}
+.summary-layout{padding-left:0!important}
+}
+@media (max-width:768px){
+body{padding-bottom:65px!important}
+.nav-links{display:none}
+.mobile-nav{display:block!important}
+.container{padding:0 16px!important}
+.hero{padding:120px 0 60px}
+.hero h1{font-size:1.8rem}
+.hero p{font-size:.95rem}
+.hero-crests img{height:50px}
+.summary-layout{grid-template-columns:1fr!important;gap:30px!important}
+.right-photo-grid{min-height:520px}
+.card-3{top:175px;height:165px}
+.summary-content h2{font-size:1.8rem}
+.summary-content .subtitle{font-size:1rem;margin-bottom:12px}
+.summary-content p{font-size:.82rem;line-height:1.5;margin-bottom:10px}
+.event-block,.event-block.reverse{grid-template-columns:1fr!important;gap:20px!important;margin-bottom:50px}
+.event-text-pane h3{font-size:1.3rem;margin-bottom:10px}
+.event-text-pane p{font-size:.85rem;line-height:1.5;margin-bottom:10px}
+.media-frame{padding:3px;border-radius:6px}
+.media-frame img{border-radius:4px}
+.frame-secondary{margin-top:20px}
+.wide-photo{margin-top:36px;margin-bottom:36px}
+.sports-header{margin-bottom:18px}
+.sports-header h3{font-size:1.3rem}
+.handball-block,.achv-block{margin-top:40px}
+.zigzag-grid{column-gap:12px}
+.zigzag-item:nth-child(even){margin-top:44px}
+.achv-intro{font-size:.88rem;margin-bottom:40px}
+.achv-item:nth-child(2){margin-top:50px}
+.athletes-intro{margin-top:40px}
+.athletes-intro h3{font-size:1.3rem}
+.athletes-intro p{font-size:.85rem;line-height:1.6}
+.btn-athletes{padding:20px 18px;font-size:1rem}
+.athletes-small .btn-athletes{max-width:300px;padding:14px 18px;font-size:.9rem}
+.athlete-row{grid-template-columns:1fr;gap:20px;margin-bottom:50px}
+.athlete-row.flip .athlete-photo{order:1}
+.athlete-row.flip .athlete-info{order:2}
+.athlete-info h3{font-size:1.4rem}
+.athlete-info p{font-size:.9rem;line-height:1.6}
+.signup-split{grid-template-columns:1fr;gap:30px}
+.signup-info h2{font-size:1.8rem}
+.form-card{padding:20px}
+.footer-grid{grid-template-columns:1fr;gap:24px}
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="container navbar">
+        <div class="logo-group">
+            <img src="images/bp26-removebg-preview.png" alt="BPIAN 26 Emblem">
+            <div class="brand-name">BPIAN <span>26</span></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#summary">About Us</a></li>
+            <li><a href="#recent">Recent Events</a></li>
+            <li><a href="#schedule">Milestones</a></li>
+            <li><a href="#signup" class="btn-nav">Register for BSCL</a></li>
+        </ul>
+    </div>
+</header>
+
+<nav class="mobile-nav">
+    <div class="mobile-nav-container">
+        <a href="#home" class="mobile-nav-item"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg><span>Home</span></a>
+        <a href="#summary" class="mobile-nav-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg><span>About</span></a>
+        <a href="#recent" class="mobile-nav-item"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg><span>Events</span></a>
+        <a href="#schedule" class="mobile-nav-item"><svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg><span>Timeline</span></a>
+        <a href="#signup" class="mobile-nav-item highlight"><svg viewBox="0 0 24 24"><path d="M22 10V6c0-1.11-.9-2-2-2H4c-1.1 0-1.99.89-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2s.9-2 2-2zm-9 7.5h-2v-2h2v2zm0-4.5h-2v-2h2v2zm0-4.5h-2v-2h2v2z"/></svg><span>Register</span></a>
+    </div>
+</nav>
+
+<section id="home" class="hero">
+    <div class="container">
+        <div class="hero-crests reveal">
+            <img src="images/images-removebg-preview.png" alt="BP Government High School Logo">
+            <img src="images/bp26-removebg-preview.png" alt="BPIAN Batch Crest">
+        </div>
+        <h1 class="reveal">Official Portal<br>BPIAN 26 Community</h1>
+        <p class="reveal">Welcome to the official hub of BPIAN-26. Dedicated to uniting batchmates, celebrating school achievements, and preserving the flagship educational legacy of Panchagarh B.P. Government High School.</p>
+        <div class="hero-action-container reveal">
+            <a href="#signup" class="btn-nav" style="display:inline-block;text-decoration:none;">Register for BSCL</a>
+            <span class="hero-event-tag">*EVENT</span>
+        </div>
+    </div>
+</section>
+
+<section id="summary" class="summary-section">
+    <div class="summary-side-badge reveal-left">
+        <div class="straight-vertical-title">
+            <span>A</span><span>B</span><span>O</span><span>U</span><span>T</span>
+            <div class="space-divider"></div>
+            <span>U</span><span>S</span>
+        </div>
+        <div class="badge-logo-slot"><img src="images/bp26-removebg-preview.png" alt="Batch Logo"></div>
+    </div>
+
+    <div class="container summary-layout">
+        <div class="summary-content reveal-left">
+            <h2>Executive summary</h2>
+            <div class="subtitle">Vision at a Glance</div>
+            <p>BPIAN-26 represents a generation shaped by the values, traditions and enduring legacy of Panchagarh B.P. Government High School. More than a graduating batch, BPIAN-26 is a community built upon shared experiences, lifelong friendships, and a collective commitment to carry forward the spirit of our institution.</p>
+            <p>Our journey extends beyond the years spent in classrooms and school grounds. It is about the memories we created, the relationships we formed, the lessons we learned and the aspirations we carry into the future. Through this platform, BPIAN-26 brings together our seniors, batchmates, juniors and others to remain connected, celebrate achievements, showcase initiatives, meaningful events and preserve the moments that define our school life.</p>
+            <p>With unity, creativity, leadership and excellence at its core, BPIAN-26 strives to build a lasting community that continues to grow beyond graduation. It is a space where our shared past meets our future ambitions, a digital home for our batch and a lasting reflection of the legacy we proudly carry.</p>
+            <p class="tagline">Rooted in our legacy. United by our journey. Inspired to shape what comes next.</p>
+        </div>
+
+        <div class="right-photo-grid">
+            <div class="photo-card card-1 reveal-right"><img src="images/Screenshot 2026-06-14 152035.png" alt="BPIAN 26 celebration"></div>
+            <div class="photo-card card-3 reveal-right"><img src="images/IMG_1494.JPG.jpeg" alt="Stage moment"></div>
+            <div class="photo-card card-4 reveal-right"><img src="images/IMG_1499.JPG.jpeg" alt="Batch celebration"></div>
+            <div class="photo-card card-5 reveal-right"><img src="images/IMG_1496.JPG.jpeg" alt="Signed t-shirt"></div>
+        </div>
+    </div>
+</section>
+
+<section id="recent" class="container event-container">
+    <div class="section-header reveal">
+        <span>Retrospective Portfolio</span>
+        <h2>Batch Highlights &amp; Initiatives</h2>
+    </div>
+
+    <div class="event-block reveal">
+        <div class="event-text-pane">
+            <h3>BPIAN School Cricket League (BSCL)</h3>
+            <p>The BPIAN School Cricket League (BSCL) 2025, organized by BPIAN-26, was an exciting cricket tournament that brought together students and teachers in a spirit of sportsmanship.</p>
+            <p>BSCL created an engaging platform where teachers and students shared the same field, competing for a single championship and strengthening the bond within the school community.</p>
+            <p>Organized entirely by BPIAN-26, the league featured structured group stages, high-voltage knockout rounds, and official match management. The tournament transformed the school grounds into a festive arena, drawing crowds of passionate supporters, vibrant commentary, and memorable night-lighting fixtures.</p>
+            <p>Beyond runs and wickets, BSCL set a new benchmark for student-led initiatives at Panchagarh B.P. Government High School—proving that sports can serve as a powerful bridge for mentorship, teamwork, and lasting school spirit.</p>
+        </div>
+        <div class="media-stack">
+            <div class="media-frame frame-primary reveal-right"><img src="images/Screenshot 2026-06-14 150223.png" alt="BSCL 2025 Group Assembly"></div>
+            <div class="media-frame frame-secondary reveal-right"><img src="images/IMG_6563.JPG.jpeg" alt="School field night lighting"></div>
+        </div>
+    </div>
+
+    <div class="event-block reverse reveal">
+        <div class="media-stack">
+            <div class="media-frame frame-primary reveal-left"><img src="images/WhatsApp Image 2026-06-13 at 14.40.29.jpeg" alt="Band Biborton performing on stage"></div>
+            <div class="media-frame frame-secondary reveal-left"><img src="images/Screenshot 2026-06-14 151146.png" alt="Sohan Ali acoustic session"></div>
+        </div>
+        <div class="event-text-pane">
+            <h3>BPIAN-26 Rag Day Celebration</h3>
+            <p>The Rag Day of BPIAN-26 was a memorable event, organized to celebrate the final years of school life with our beloved friends and respected teachers.</p>
+            <p>The celebration featured commemorative T-shirts, photography sessions, and a live concert featuring performances by Sohan Ali and Band Biborton.</p>
+        </div>
+    </div>
+</section>
+
+<section id="schedule" class="schedule-section">
+    <div class="container">
+        <div class="section-header reveal">
+            <span>Core Pillars</span>
+            <h2>Batch Milestones</h2>
+        </div>
+
+        <!-- WIDE IMAGE -->
+        <div class="wide-photo reveal">
+            <div class="media-frame"><img src="images/WhatsApp Image 2026-09-28 at 11.24.06 PM.jpeg" alt="Batch milestone photo"></div>
+        </div>
+
+        <!-- HANDBALL -->
+        <div class="sports-block handball-block">
+            <div class="sports-header reveal">
+                <span>On the Field</span>
+                <h3>Handball Achievements</h3>
+                <p>Teamwork, competition and school spirit captured on the grounds.</p>
+            </div>
+            <div class="athletes-cta reveal">
+                <button type="button" class="btn-athletes" id="handballBtn" aria-expanded="false" aria-controls="handballShowcase">
+                    <span id="handballBtnText">View Handball Achievements</span>
+                    <svg viewBox="0 0 24 24"><path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+                </button>
+            </div>
+            <div class="handball-showcase" id="handballShowcase">
+                <div class="zigzag-grid">
+                    <div class="zigzag-item reveal-left"><div class="media-frame"><img src="images/WhatsApp Image 2026-09-28 at 11.45.57 PM.jpeg" alt="Handball photo 1"></div></div>
+                    <div class="zigzag-item reveal-right"><div class="media-frame"><img src="images/WhatsApp Image 2026-09-28 at 11.31.18 PM.jpeg" alt="Handball photo 2"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACADEMIC ACHIEVEMENTS -->
+        <div class="achv-block">
+            <div class="sports-header reveal">
+                <span>Pride of the Batch</span>
+                <h3>Academic Achievements</h3>
+            </div>
+            <div class="athletes-cta reveal">
+                <button type="button" class="btn-athletes" id="achvBtn" aria-expanded="false" aria-controls="achvShowcase">
+                    <span id="achvBtnText">View Our GPA 5 Achievers</span>
+                    <svg viewBox="0 0 24 24"><path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+                </button>
+            </div>
+            <div class="achv-showcase" id="achvShowcase">
+                <p class="achv-intro reveal">Excellence in the classroom is the heart of BPIAN-26. Behind every GPA 5 is late-night study, steady discipline, and the support of teachers and family. These are the students who proved that hard work always finds its reward, and who now carry the crest of our school with pride.</p>
+                <div class="achv-grid">
+                    <div class="achv-item reveal-left"><div class="media-frame"><img src="images/IMG_2647executive.JPG" alt="Students holding the GPA 5 crest"></div></div>
+                    <div class="achv-item reveal-right"><div class="media-frame"><img src="images/Screenshot 2026-09-29 133637.png" alt="Students holding the GPA 5 crest"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ATHLETES -->
+        <div class="athletes-intro reveal">
+            <span>Meet the Stars</span>
+            <h3>Our Athletes</h3>
+            <p>Behind every trophy and every cheering crowd are the athletes who gave their sweat.</p>
+        </div>
+        <div class="athletes-cta athletes-small reveal">
+            <button type="button" class="btn-athletes" id="athletesBtn" aria-expanded="false" aria-controls="athletesShowcase">
+                <span id="athletesBtnText">Learn More About Our Athletes</span>
+                <svg viewBox="0 0 24 24"><path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+            </button>
+        </div>
+
+        <div class="athletes-showcase" id="athletesShowcase">
+            <div class="athlete-row">
+                <div class="athlete-photo reveal-left"><img src="images/WhatsApp Image 2026-09-28 at 11.39.34 PM.jpeg" alt="Captain Rafsan Ahmed"></div>
+                <div class="athlete-info reveal-right">
+                    <span class="athlete-tag">Captain</span>
+                    <h3>Rafsan Ahmed</h3>
+                    <p>Sports Leader | BPIAN-26
+
+A dedicated sportsman and emerging leader of BPIAN-26, Rafsan Ahmed has played a significant role in representing Panchagarh B.P. Government High School across multiple sporting disciplines.
+
+Serving as the Handball Captain, Rafsan led the school team to a 1st-place finish at the divisional stage, earning the opportunity to compete at the Rajshahi অঞ্চল stage.
+
+His sporting journey also extends to cricket, where he served as the Vice Captain of the school team and contributed to their achievement as Divisional Runners-Up.
+
+Through leadership, teamwork, and consistent dedication, Rafsan has proudly represented his school both on and off the field.
+
+The legacy continues with you, Captain. 🏆✨</p>
+                </div>
+            </div>
+
+            <div class="athlete-row flip">
+                <div class="athlete-photo reveal-right"><img src="images/WhatsApp Image 2026-09-28 at 11.39.33 PM.jpeg" alt="Abrar Yeamin"></div>
+                <div class="athlete-info reveal-left">
+                    <span class="athlete-tag">MultiSport Athlete</span>
+                    <h3>Abrar Yeamin</h3>
+                    <p>Cricketer | Multi-Sport Athlete | BPIAN-26
+
+A proud representative of BPIAN-26, Abrar Yeamin has established himself as one of the promising young sporting talents of Panchagarh B.P. Government High School.
+
+His most notable milestone came with his selection to the main squad selection camp of the Bangladesh U-16 National School Cricket Team, marking a significant step forward in his cricketing journey. 🇧🇩🏏
+
+Abrar has also represented his school at the divisional level, taking on leadership responsibilities as a Divisional Cricket Captain and contributing significantly to the team across competitive platforms.
+
+Beyond cricket, he has been an important member of the school’s handball team, demonstrating his versatility, teamwork, and commitment across multiple sports.
+
+From representing his school on major sporting stages to earning national-level recognition, Abrar continues to carry the pride and legacy of B.P. Government High School with determination and ambition.
+
+Our Pride. Our Bright Star. The journey has only just begun. ⭐🇧🇩</p>
+                </div>
+            </div>
+
+            <div class="athlete-row">
+                <div class="athlete-photo reveal-left"><img src="images/fardin.jpeg" alt="Fardin Tahseen"></div>
+                <div class="athlete-info reveal-right">
+                    <span class="athlete-tag">MultiSport Athlete</span>
+                    <h3>Fardin Tahseen</h3>
+                    <p>Fardin Tahseen: The Driving Force of BPIAN-26
+Whether anchoring a tense run chase on the cricket pitch or orchestrating a vital defensive stop and fast break on the handball court, Fardin’s athletic identity is built on versatility and relentless drive. His capability to seamlessly transition between entirely different sports highlights his elite game IQ, supreme physical conditioning, and adaptability.
+
+Key Attributes on the Field
+Clutch Performer: Thrives when the scoreboard is tight, turning high-pressure situations into defining moments for his squad.
+
+Tactical Versatility: Translates sharp tactical awareness from cricket's strategic demands into the high-speed, fluid decision-making required in competitive handball.
+
+Natural Leadership: Leads by example, lifting his teammates' morale through sheer work ethic, tactical discipline, and vocal encouragement when momentum shifts.
+
+Beyond the box scores and match statistics, Fardin represents the ultimate team-first mentality. Every dive, every crucial block, and every calculated shot is executed with a singular focus: elevating the team and securing the win.</p>
+                </div>
+            </div>
+
+            <div class="athlete-row flip">
+                <div class="athlete-photo reveal-right"><img src="images/WhatsApp Image 2026-09-29 at 6.18.26 AM.jpeg" alt="Football Captain SM Sadid"></div>
+                <div class="athlete-info reveal-left">
+                    <span class="athlete-tag">MultiSport Athlete</span>
+                    <h3>SM Sadid</h3>
+                    <p>Multi-Sport Athlete | Football Captain | BPIAN-26
+
+A distinguished multi-sport athlete of BPIAN-26, SM Sadid has built an impressive sporting journey across football, chess, and badminton, representing the spirit of excellence and versatility that defines a true BPIAN.
+
+As the Football Captain of Panchagarh B.P. Government High School, Sadid has led his team with determination, discipline, and responsibility, carrying the pride of his school onto the field.
+
+His achievements extend beyond football. In Chess, he has earned National Champion recognition and secured 3rd place at the Under-12 National level. He has also achieved the distinction of being a District Champion in Badminton.
+
+From the football field to the chessboard and badminton court, Sadid continues to demonstrate exceptional dedication, competitive spirit, and leadership.
+
+Carrying the pride of the whole school on his shoulders. ⚽🏆♟️</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="signup" class="signup-section">
+    <div class="container signup-split">
+        <div class="signup-info reveal-left">
+            <h2>REGISTER FOR BSCL: Season 2</h2>
+            <p>Get ready for the biggest cricket event of Panchagarh B.P. Government High School! Send your registration fee via bKash, upload your team crest, copy your Transaction ID (TrxID), and submit your details below for verification.</p>
+        </div>
+
+        <div class="form-card reveal-right">
+            <div class="bkash-guide-box">
+                <div class="guide-title"><span>Step 1: Pay Registration Fee (3000 BDT)</span></div>
+                <div class="num-display">
+                    <span id="bkashNum">01644799164</span>
+                    <button type="button" class="copy-btn" id="copyNumBtn">Copy Number</button>
+                </div>
+                <ol class="steps-list">
+                    <li>Send <strong>3000 BDT</strong> via bKash <strong>Send Money</strong> to the number above.</li>
+                    <li>Copy the <strong>TrxID</strong> (Transaction ID) from your bKash SMS.</li>
+                    <li>Upload your <strong>Team Logo</strong>, fill in the form below and paste your <strong>TrxID</strong> to register.</li>
+                </ol>
+            </div>
+
+            <form id="bsclRegisterForm">
+                <div class="form-group">
+                    <label for="userName">Full Name <span>*</span></label>
+                    <input type="text" id="userName" placeholder="e.g. Tanvir Ahmed" required>
+                </div>
+                <div class="form-group">
+                    <label for="userBatch">Your Batch <span>*</span></label>
+                    <input type="text" id="userBatch" placeholder="e.g. 27, Batch 32, or any batch" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <label for="userPhone">Contact Number <span>*</span></label>
+                    <input type="tel" id="userPhone" placeholder="e.g. 017XXXXXXXX" maxlength="11" required>
+                </div>
+                <div class="form-group">
+                    <label>Upload Team Logo <span>*</span></label>
+                    <div class="file-upload-wrapper" id="fileWrapper">
+                        <svg class="file-upload-icon" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+                        <div class="file-upload-text">Click to choose team logo from photos or files</div>
+                        <div class="file-upload-subtext">PNG, JPG or JPEG (Max size: 5MB)</div>
+                        <input type="file" id="teamLogoInput" accept="image/*" required>
+                    </div>
+                    <div class="file-preview-container" id="filePreviewBox">
+                        <img src="" alt="Team Logo Preview" class="file-preview-img" id="previewImg">
+                        <div class="file-preview-info"><div class="file-preview-name" id="fileNameText">logo.png</div></div>
+                        <button type="button" class="remove-file-btn" id="removeFileBtn">Change</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="trxId">bKash Transaction ID (TrxID) <span>*</span></label>
+                    <input type="text" id="trxId" placeholder="e.g. 9J82A1KL0M" maxlength="12" style="text-transform:uppercase;" required>
+                </div>
+                <button type="submit" class="btn-submit">
+                    <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;"><path d="M12.031 2c-5.517 0-9.993 4.476-9.993 9.993 0 1.763.459 3.483 1.33 5.001l-1.396 5.09 5.228-1.37a9.92 9.92 0 0 0 4.831 1.258h.004c5.516 0 9.993-4.476 9.993-9.993 0-2.668-1.038-5.176-2.926-7.063A9.928 9.928 0 0 0 12.031 2zm0 18.232h-.003a8.26 8.26 0 0 1-4.218-1.157l-.302-.18-3.13.82.835-3.048-.197-.314a8.272 8.272 0 0 1-1.272-4.36c0-4.57 3.718-8.288 8.288-8.288 2.214 0 4.296.863 5.862 2.43 1.566 1.566 2.428 3.649 2.428 5.863 0 4.57-3.718 8.288-8.287 8.288zm4.542-6.208c-.249-.125-1.472-.726-1.7-.809-.228-.083-.394-.125-.56.125-.166.249-.644.809-.789.975-.145.166-.291.187-.54.062s-1.05-.387-2.001-1.235c-.74-.66-1.24-1.475-1.385-1.724-.145-.249-.015-.384.109-.508.112-.112.249-.291.374-.436.125-.145.166-.249.249-.415.083-.166.042-.311-.021-.436-.062-.125-.56-1.35-.768-1.849-.202-.486-.407-.42-.56-.428l-.478-.008c-.166 0-.436.062-.664.311s-.872.851-.872 2.075c0 1.224.892 2.407 1.017 2.573.125.166 1.756 2.681 4.254 3.76.594.257 1.058.41 1.42.526.597.19 1.141.163 1.57.099.479-.071 1.472-.602 1.68-1.183.208-.581.208-1.079.145-1.183-.062-.104-.228-.166-.477-.291z"/></svg>
+                    Submit Registration &amp; Verify TrxID
+                </button>
+                <div id="alertBox" class="response-alert"></div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container footer-grid">
+        <div class="footer-brand">
+            <h4>BPIAN Legacy Portfolio</h4>
+            <p>Supporting educational platforms, knowledge pathways, and technology challenges across Panchagarh.</p>
+        </div>
+        <div class="footer-connect">
+            <h4>Connect with BPIAN 26</h4>
+            <ul class="footer-links">
+                <li><a href="mailto:bpian2678@gmail.com"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>bpian2678@gmail.com</a></li>
+                <li><a href="https://www.instagram.com/bpian_26/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>@bpian_26</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+        <span>&copy; 2026 BPIAN-26. All rights reserved.</span>
+        <span style="display:flex;align-items:center;gap:6px;">crafted by :
+            <a href="https://www.instagram.com/safxcf/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:4px;color:inherit;text-decoration:none;"><span>SAFXCF</span></a>
+        </span>
+    </div>
+</footer>
+
+<script>
+    // Scroll animations
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObserver.observe(el));
+
+    // Reusable show/hide toggle (skips safely if an element is missing)
+    function setupToggle(btnId, boxId, textId, openText, closedText) {
+        const btn = document.getElementById(btnId);
+        const box = document.getElementById(boxId);
+        const txt = document.getElementById(textId);
+        if (!btn || !box) return;
+        btn.addEventListener('click', function () {
+            const isOpen = box.classList.toggle('open');
+            btn.setAttribute('aria-expanded', isOpen);
+            if (txt) txt.textContent = isOpen ? openText : closedText;
+        });
+    }
+    setupToggle('handballBtn', 'handballShowcase', 'handballBtnText', 'Hide Handball Achievements', 'View Handball Achievements');
+    setupToggle('achvBtn', 'achvShowcase', 'achvBtnText', 'Hide GPA 5 Achievers', 'View Our GPA 5 Achievers');
+    setupToggle('athletesBtn', 'athletesShowcase', 'athletesBtnText', 'Hide Athletes', 'Learn More About Our Athletes');
+
+    // Copy bKash number
+    const copyBtn = document.getElementById('copyNumBtn');
+    if (copyBtn) {
+        copyBtn.addEventListener('click', function () {
+            if (navigator.clipboard) navigator.clipboard.writeText('01644799164');
+            this.textContent = 'Copied!';
+            setTimeout(() => { this.textContent = 'Copy Number'; }, 2500);
+        });
+    }
+
+    // Team logo upload
+    const logoInput = document.getElementById('teamLogoInput');
+    const fileWrapper = document.getElementById('fileWrapper');
+    const previewBox = document.getElementById('filePreviewBox');
+    const previewImg = document.getElementById('previewImg');
+    const fileNameText = document.getElementById('fileNameText');
+    const removeFileBtn = document.getElementById('removeFileBtn');
+
+    if (logoInput) {
+        logoInput.addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File is too large. Max size is 5MB.');
+                logoInput.value = '';
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function (evt) {
+                previewImg.src = evt.target.result;
+                fileNameText.textContent = file.name;
+                fileWrapper.style.display = 'none';
+                previewBox.style.display = 'flex';
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+    if (removeFileBtn) {
+        removeFileBtn.addEventListener('click', function () {
+            logoInput.value = '';
+            previewImg.removeAttribute('src');
+            fileNameText.textContent = '';
+            previewBox.style.display = 'none';
+            fileWrapper.style.display = 'block';
+        });
+    }
+
+    // Registration submission
+    const form = document.getElementById('bsclRegisterForm');
+    if (form) {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('userName').value.trim();
+            const batch = document.getElementById('userBatch').value.trim();
+            const phone = document.getElementById('userPhone').value.trim();
+            const trxId = document.getElementById('trxId').value.trim().toUpperCase();
+            const logoFile = logoInput.files[0];
+            const alertBox = document.getElementById('alertBox');
+
+            function showError(msg) {
+                alertBox.className = 'response-alert error';
+                alertBox.style.display = 'block';
+                alertBox.textContent = msg;
+            }
+            if (!/^[0-9]{11}$/.test(phone)) return showError('Invalid phone number! Please enter exactly 11 digits.');
+            if (!logoFile) return showError('Please choose a team logo file or photo.');
+            if (trxId.length < 8) return showError('Please enter a valid bKash Transaction ID (TrxID).');
+
+            alertBox.className = 'response-alert success';
+            alertBox.style.display = 'block';
+            alertBox.textContent = 'Sending details to organizers for verification...';
+
+            const text =
+                '*BSCL Season 2 Registration Request*\n\n' +
+                '*Name:* ' + name + '\n' +
+                '*Batch:* ' + batch + '\n' +
+                '*Phone:* ' + phone + '\n' +
+                '*bKash TrxID:* ' + trxId + '\n' +
+                '*Logo File:* ' + logoFile.name + '\n\n' +
+                'Please verify my payment and confirm my spot!';
+
+            window.open('https://wa.me/8801644799164?text=' + encodeURIComponent(text), '_blank');
+        });
+    }
+</script>
+</body>
+</html>
